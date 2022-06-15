@@ -1,18 +1,13 @@
-In this exercice, we'll implement the building block of a simple React translation library, just for fun. I
-created this to practice TDD, and thought I could share it with the world. So here I am, writing this
-readme... Hope you'll enjoy doing it!
+In this exercice, we'll implement the building blocks of a simple React translation library, just for fun. I created this to practice TDD, and thought I could share it with the world. So here I am, writing this readme... Hope you'll enjoy doing it!
 
-Estimated time: about an hour if you know react, certainly more if you don't
-Practicing skills: JS / TS, React API and a bit of algorithmic
+- Estimated time: about an hour if you know react, certainly more if you don't
+- Practicing skills: JS / TS, React API and a bit of algorithmic
 
 ## 0 - A react hook
 
-Let's setup this thing. First, we want to use a `useTranslate` hook, that will return a translation function.
-When calling this translation function with a translation key (a string) as first parameter, it should return
-the corresponding translated value.
+Let's setup this thing. First, we want a `useTranslate` hook, that will return a translation function. When calling this function with a translation key (a string) as first parameter, it should return the corresponding translated value.
 
-To provide the mapping between keys and values, we'll just use an object and a React context. Here is the
-expected output:
+To provide the mapping between keys and values, we'll just use an object and a React context. Here is the expected output:
 
 ```tsx
 import { TranslationProvider, useTranslate } from "./your-code";
@@ -37,8 +32,7 @@ const App = () => (
 
 ## 1 - Nested keys
 
-Now, we want to handle nested translations, that we'll be referencing with a dot notation in our translation
-key.
+Now, we want to handle nested translations, that will be referenced with a dot notation in our translation keys.
 
 ```tsx
 const translations = {
@@ -57,26 +51,20 @@ const translations = {
 
 ## 2 - String interpolations
 
-For now, our system is pretty static. Let's make it a more dynamic by allowing to specify placeholders in the
-translated value!
+For now, our system is pretty static. Let's make it more dynamic by allowing to specify placeholders in the translated value.
 
 ```tsx
 const translations = {
-  welcome: "Hi {who}, welcome on board!",
-  welcomeWhere: "Hi {who}, welcome {where}!",
+  welcome: "Hi {who}, welcome {where}!",
 };
 
-// renders "Hi Bertrand, welcome on board!"
-<>{t("welcome", { who: "Bertrand" })}</>;
-
-// renders "Hi Juliette, welcome here!"
-<>{t("welcome", { who: "Juliette", where: "here" })}</>;
+// renders "Hi Bertrand, welcome here!"
+<>{t("welcome", { who: "Bertrand", where: "here" })}</>;
 ```
 
-## 3 - Translation or interpolation not found
+## 3 - Missing translation or interpolation
 
-When the translation key does not exist, the code miserably fails. We should throw a friendly descriptive
-error instead.
+When the translation key does not exist, the code miserably fails. We should throw a friendly descriptive error instead.
 
 Same goes for the interpolations, let's throw an error when it is not provided.
 
@@ -109,8 +97,7 @@ const translations = {
 
 ## 5 - Custom interpolation
 
-To be more permissive, we'll allow providing a custom render function in the interpolation object. This will
-also allow to render a custom component.
+To be more permissive, we'll allow providing a custom render function in the interpolation object. This will also allow rendering custom components.
 
 ```tsx
 const translations = {
@@ -127,13 +114,13 @@ const translations = {
 
 ## 6 - Everything
 
-Of course, everything should work at the same time!
+And of course, everything should work at the same time!
 
+<!-- prettier-ignore -->
 ```tsx
 const translations = {
   navbar: {
-    unreadMessages:
-      "You have <strong>{count}</strong> unread message(s). <Link>(open)</Link>",
+    unreadMessages: "You have <strong>{count}</strong> unread message(s). <Link>(open)</Link>",
   },
 };
 
